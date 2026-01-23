@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="ClassroomEquipmentAccountingEntities/ClassroomEquipmentAccountingEntities.csproj" />
+  <Project Path="FormatConverterLib/FormatConverterLib.csproj" Id="4ca111cf-5664-48fc-96da-cd9e84b64d14" />
+  <Project Path="TestConsoleApp/TestConsoleApp.csproj" Id="f1464805-f840-4d8b-adfe-27117f816d72" />
+</Solution>
