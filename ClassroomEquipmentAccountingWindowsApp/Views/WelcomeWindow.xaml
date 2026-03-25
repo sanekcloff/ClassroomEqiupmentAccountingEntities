@@ -4,9 +4,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ClassroomEquipmentAccountingWindowsApp.Views"
+        xmlns:vm="clr-namespace:ClassroomEquipmentAccountingWindowsApp.ViewModels"
         mc:Ignorable="d"
-        Title="WelcomeWindow" Height="450" Width="800">
-    <Grid>
+        Title="Окно входа" Height="250" Width="400" ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+        <vm:WelcomeWindowViewModel/>
+    </Window.DataContext>
+    
+    <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+        <TextBox Width="250" Height="40" Margin="0,0,0,5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Login}"/>
         
-    </Grid>
+        <TextBox Width="250" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Password}"/>
+
+        <Button Width="150" Height="30" Margin="0,5,0,0" Content="Вход" Command="{Binding LoginCommand}"/>
+
+        <Button Width="150" Height="30" Margin="0,5,0,0" Content="Регистрация" Command="{Binding RegistrationCommand}"/>
+
+    </StackPanel>
+    
 </Window>

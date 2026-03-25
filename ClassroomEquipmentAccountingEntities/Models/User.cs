@@ -18,7 +18,7 @@ namespace ClassroomEquipmentAccountingEntities.Models
             Tag = Tag.None;
             Classrooms = new HashSet<Classroom>();
         }
-        public User(string login, string passwordHash, string firstName, string lastName, string middleName, Permission permissions, Tag tag)
+        public User(string login, string passwordHash, string firstName, string lastName, string middleName, Permission permissions = Permission.None, Tag tag = Tag.None)
         {
             Login = login;
             PasswordHash = passwordHash;

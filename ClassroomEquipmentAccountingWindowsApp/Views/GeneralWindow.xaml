@@ -1,0 +1,28 @@
+﻿<Window x:Class="ClassroomEquipmentAccountingWindowsApp.Views.GeneralWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassroomEquipmentAccountingWindowsApp.Views"
+        xmlns:models="clr-namespace:ClassroomEquipmentAccountingEntities.Models;assembly=ClassroomEquipmentAccountingEntities"
+        xmlns:vm="clr-namespace:ClassroomEquipmentAccountingWindowsApp.ViewModels"
+        xmlns:converters="clr-namespace:ClassroomEquipmentAccountingWindowsApp.Core.Converters"
+        mc:Ignorable="d"
+        Title="GeneralWindow" Height="450" Width="800">
+    <Window.Resources>
+        <converters:PermissionToVisibilityConverter x:Key="PermissionToVisibilityConverter" Invert="False"/>
+        <converters:PermissionToVisibilityConverter x:Key="PermissionToVisibilityConverter_Inverted" Invert="True"/>
+    </Window.Resources>
+    <Window.DataContext>
+        <vm:GeneralWindowViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+
+        <TextBlock Text="У вас отсутвует доступ к функциям" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Visibility="{Binding CurrentUser, Converter={StaticResource PermissionToVisibilityConverter_Inverted},ConverterParameter={x:Static models:Permission.None}}"/>
+
+
+
+    </Grid>
+    
+</Window>
