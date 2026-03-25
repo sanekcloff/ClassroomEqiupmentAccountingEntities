@@ -34,7 +34,7 @@ namespace ClassroomEquipmentAccountingEntities.Models
         public bool IsEquipmentAreEmpty => Equipments.Count == 0;
         public bool IsAvailableForUse => !IsEquipmentAreEmpty;
         public override string ToString() => $"[{Id}][{Number}] {Specialization} - {Manager.ShortName} (IsHidden = {IsHidden})";
-        public override bool Equals(object? obj) => obj == null || !(obj is Classroom) ? false : true;
+        public override bool Equals(object? obj) => obj == null || !(obj is Classroom) ? false : GetHashCode() == obj.GetHashCode();
         public override int GetHashCode() => HashCode.Combine(Number);
     }
 }

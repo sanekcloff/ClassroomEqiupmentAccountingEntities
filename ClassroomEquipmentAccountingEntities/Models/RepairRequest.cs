@@ -32,9 +32,9 @@ namespace ClassroomEquipmentAccountingEntities.Models
 
         public virtual ICollection<RepairRequestEquipment> RepairRequestEquipments { get; set; }
 
-        public ushort GetBeetweenDays() => (ushort)Math.Clamp((EndDate-StartDate)!.Value.Days, ushort.MinValue, ushort.MaxValue);
+        public ushort BeetweenDays => (ushort)Math.Clamp((EndDate-StartDate)!.Value.Days, ushort.MinValue, ushort.MaxValue);
         public override string ToString() => $"[{Id}] {StartDate} - {EndDate} / Описание: {_description}";
-        public override bool Equals(object? obj) => obj == null || !(obj is RepairRequest) ? false : true;
+        public override bool Equals(object? obj) => obj == null || !(obj is RepairRequest) ? false : GetHashCode() == obj.GetHashCode();
         public override int GetHashCode() => HashCode.Combine(StartDate,EndDate,Description);
         public RepairRequest AddEquipment(Equipment equipment)
         {

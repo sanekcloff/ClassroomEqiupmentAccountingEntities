@@ -28,9 +28,9 @@ namespace ClassroomEquipmentAccountingEntities.Models
                 return Convert.ToUInt16(age);
             }
         }
-        public void TransferToReserv() => Status = Status.Reserve;
+        public void TransferToReserve() => Status = Status.Reserve;
         public void MarkDecommission() => Status = Status.Decommissioned;
-        public override bool Equals(object? obj) => obj == null || !(obj is Equipment) ? false : true;
+        public override bool Equals(object? obj) => obj == null || !(obj is Equipment) ? false : GetHashCode() == obj.GetHashCode();
         public override int GetHashCode() => HashCode.Combine(SerialNumber, InventoryNumber, Model);
         public override string ToString() => $"[{Id}][Serial - {SerialNumber}] [Inventory - {InventoryNumber}] {Category} - {Classroom}, Status: {Status}";
 
@@ -38,6 +38,22 @@ namespace ClassroomEquipmentAccountingEntities.Models
         {
             if (equipment1 != null) yield return equipment1;
             if (equipment2 != null) yield return equipment2;
+        }
+        public static IEnumerable<Equipment> operator +(IEnumerable<Equipment> collection, Equipment equipmentToAdd)
+        {
+            if (collection == null) yield break;
+            foreach (var equipment in collection)
+                yield return equipment;
+            if (equipmentToAdd != null)
+                yield return equipmentToAdd;
+        }
+        public static IEnumerable<Equipment> operator +(Equipment equipmentToAdd, IEnumerable<Equipment> collection)
+        {
+            if (collection == null) yield break;
+            foreach (var equipment in collection)
+                yield return equipment;
+            if (equipmentToAdd != null)
+                yield return equipmentToAdd;
         }
         public static IEnumerable<Equipment> operator -(Equipment equipment1, Equipment equipment2)
         {

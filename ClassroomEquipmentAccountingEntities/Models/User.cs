@@ -43,7 +43,7 @@ namespace ClassroomEquipmentAccountingEntities.Models
         public string ShortName => $"{LastName} {FirstName[0]}. {MiddleName[0]}.";
 
         public override int GetHashCode() => HashCode.Combine(Login);
-        public override bool Equals(object? obj) => obj == null || !(obj is User) ? false : true;
+        public override bool Equals(object? obj) => obj == null || !(obj is User) ? false : GetHashCode() == obj.GetHashCode();
         public override string ToString() => $"[{Id}][{FullName}] - {Login}:{Permissions} (IsHidden = {IsHidden})";
     }
 }

@@ -21,7 +21,7 @@ namespace ClassroomEquipmentAccountingEntities.Models
         public RepairRequest RepairRequest { get; set; }
         public Equipment Equipment { get; set; }
         public override string ToString() => $"{RepairRequest} - {Equipment}";
-        public override bool Equals(object? obj) => obj == null || !(obj is RepairRequestEquipment) ? false : true;
+        public override bool Equals(object? obj) => obj == null || !(obj is RepairRequestEquipment) ? false : GetHashCode() == obj.GetHashCode();
         public override int GetHashCode() => HashCode.Combine(RepairRequest,Equipment);
     }
 }

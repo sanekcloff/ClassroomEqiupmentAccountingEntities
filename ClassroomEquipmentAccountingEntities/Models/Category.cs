@@ -25,7 +25,7 @@ namespace ClassroomEquipmentAccountingEntities.Models
         public string? Description { get; set; }
 
         public virtual ICollection<Equipment> Equipments { get; set; }
-        public override bool Equals(object? obj) => obj == null || !(obj is Category) ? false : true;
+        public override bool Equals(object? obj) => obj == null || !(obj is Category) ? false : GetHashCode() == obj.GetHashCode();
         public override int GetHashCode() => HashCode.Combine(Title);
         public override string ToString() => $"[{Id}][{GetType().Name}] {Title}: {Description} (IsHidden = {IsHidden})";
     }
