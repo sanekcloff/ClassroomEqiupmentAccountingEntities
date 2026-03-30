@@ -28,6 +28,7 @@ namespace ClassroomEquipmentAccountingEntities.Core.Database
                 .HasForeignKey(c => c.ManagerId)
                 .OnDelete(DeleteBehavior.Cascade);
 
+            //login: login, password: password
             modelBuilder.Entity<User>()
                 .HasData(new User("login", "500:Nj5sBszKuiPv9Syy3eV4sg==:D0Z5twb40MEuBiqfdHZbRKVWgZwK4PAeR3XB/VCAjlM=", "Виталий", "Папич", "Петрович", Permission.Administrator, Tag.Admin) { Id = 1, RowCreatedAt = new DateTime(2000,12,3), RowUpdateAt = new DateTime(2000, 12, 3) });
         }
