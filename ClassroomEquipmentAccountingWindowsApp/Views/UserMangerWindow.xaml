@@ -1,0 +1,194 @@
+﻿<Window x:Class="ClassroomEquipmentAccountingWindowsApp.Views.UserMangerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ClassroomEquipmentAccountingWindowsApp.Views"
+        xmlns:vm="clr-namespace:ClassroomEquipmentAccountingWindowsApp.ViewModels"
+        mc:Ignorable="d"
+        Title="Окно управления пользователем" Height="450" Width="800" ResizeMode="NoResize" Background="{StaticResource WindowPrimaryColor}">
+    <Window.DataContext>
+        <vm:UserManagerWindowViewModel/>
+    </Window.DataContext>
+    
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="90"/>
+            <RowDefinition Height="90"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="230">
+
+                <TextBlock Text="Логин" FontSize="16" Margin="4,4,4,2"/>
+                <TextBox Text="{Binding Login, UpdateSourceTrigger=PropertyChanged}" Height="30" FontSize="16" Margin="4,2,4,4"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="230">
+
+                <TextBlock Text="Пароль" FontSize="16" Margin="4,4,4,2"/>
+                <TextBox Text="{Binding Password, UpdateSourceTrigger=PropertyChanged}" Height="30" FontSize="16" Margin="4,2,4,4"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="230">
+
+                <TextBlock Text="Тэг" FontSize="16" Margin="4,4,4,2"/>
+                <ComboBox ItemsSource="{Binding Tags}" SelectedItem="{Binding SelectedTag,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0" Height="30" FontSize="16" Margin="4,2,4,4"/>
+
+            </StackPanel>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+            <Grid.ColumnDefinitions>
+
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="230">
+
+                <TextBlock Text="Фамилия" FontSize="16" Margin="4,4,4,2"/>
+                <TextBox Text="{Binding Lastname, UpdateSourceTrigger=PropertyChanged}" Height="30" FontSize="16" Margin="4,2,4,4"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="230">
+
+                <TextBlock Text="Имя" FontSize="16" Margin="4,4,4,2"/>
+                <TextBox Text="{Binding Firstname, UpdateSourceTrigger=PropertyChanged}" Height="30" FontSize="16" Margin="4,2,4,4"/>
+
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="230">
+
+                <TextBlock Text="Отчество" FontSize="16" Margin="4,4,4,2"/>
+                <TextBox Text="{Binding Middlename, UpdateSourceTrigger=PropertyChanged}" Height="30" FontSize="16" Margin="4,2,4,4"/>
+
+            </StackPanel>
+
+        </Grid>
+
+        <Border Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="750" Height="210" CornerRadius="20" Background="{StaticResource WindowSecondaryColor}">
+
+            <ScrollViewer Margin="10">
+
+                <StackPanel Orientation="Vertical">
+
+                    <TextBlock Text="Права аудиторий" Margin="2,2,2,1"/>
+
+                    <Grid Margin="2,1,2,2">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox IsChecked="{Binding ClassroomsViewing,UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Content="Просмотр"/>
+                        <CheckBox IsChecked="{Binding ClassroomsAdd,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Content="Добавление"/>
+                        <CheckBox IsChecked="{Binding ClassroomsEdit,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="2" Content="Редактирование"/>
+                        <CheckBox IsChecked="{Binding ClassroomsDelete,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="3" Content="Удаление"/>
+
+                    </Grid>
+
+                    <TextBlock Text="Права пользователя" Margin="2,2,2,1"/>
+
+                    <Grid Margin="2,1,2,2">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox IsChecked="{Binding UsersViewing,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="0" Content="Просмотр"/>
+                        <CheckBox IsChecked="{Binding UsersAdd,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Content="Добавление"/>
+                        <CheckBox IsChecked="{Binding UsersEdit,UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Content="Редактирование"/>
+                        <CheckBox IsChecked="{Binding UsersDelete,UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Content="Удаление"/>
+
+                    </Grid>
+
+                    <TextBlock Text="Права оборудования" Margin="2,2,2,1"/>
+
+                    <Grid Margin="2,1,2,2">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox IsChecked="{Binding EquipmentsViewing,UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Content="Просмотр"/>
+                        <CheckBox IsChecked="{Binding EquipmentsAdd,UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" Content="Добавление"/>
+                        <CheckBox IsChecked="{Binding EquipmentsEdit,UpdateSourceTrigger=PropertyChanged}" Grid.Column="2" Content="Редактирование"/>
+                        <CheckBox IsChecked="{Binding EquipmentsDelete,UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Content="Удаление"/>
+
+                    </Grid>
+
+                    <TextBlock Text="Права категорий" Margin="2,2,2,1"/>
+
+                    <Grid Margin="2,1,2,2">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox IsChecked="{Binding CategoriesViewing,UpdateSourceTrigger=PropertyChanged}" Grid.Column="0" Content="Просмотр"/>
+                        <CheckBox IsChecked="{Binding CategoriesAdd,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Content="Добавление"/>
+                        <CheckBox IsChecked="{Binding CategoriesEdit,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="2" Content="Редактирование"/>
+                        <CheckBox IsChecked="{Binding CategoriesDelete,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="3" Content="Удаление"/>
+
+                    </Grid>
+
+                    <TextBlock Text="Права заявок на ремонт" Margin="2,2,2,1"/>
+
+                    <Grid Margin="2,1,2,2">
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+
+                        <CheckBox IsChecked="{Binding RepairRequestViewing,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="0" Content="Просмотр"/>
+                        <CheckBox IsChecked="{Binding RepairRequestAdd,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="1" Content="Добавление"/>
+                        <CheckBox IsChecked="{Binding RepairRequestEdit,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="2" Content="Редактирование"/>
+                        <CheckBox IsChecked="{Binding RepairRequestDelete,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="3" Content="Удаление"/>
+                        <CheckBox IsChecked="{Binding RepairRequestInventoryCreation,UpdateSourceTrigger=PropertyChanged}"  Grid.Column="4" Content="Вывод в документ"/>
+
+                    </Grid>
+
+                </StackPanel>
+                
+            </ScrollViewer>
+            
+        </Border>
+
+    </Grid>
+    
+</Window>
