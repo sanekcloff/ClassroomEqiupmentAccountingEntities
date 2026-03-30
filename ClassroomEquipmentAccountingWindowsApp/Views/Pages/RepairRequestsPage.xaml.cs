@@ -1,5 +1,4 @@
-﻿using ClassroomEquipmentAccountingWindowsApp.Views.Pages;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows;
@@ -9,16 +8,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ClassroomEquipmentAccountingWindowsApp.Views
+namespace ClassroomEquipmentAccountingWindowsApp.Views.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для GeneralWindow.xaml
+    /// Логика взаимодействия для UsersPage.xaml
     /// </summary>
-    public partial class GeneralWindow : Window
+    public partial class RepairRequestsPage : Page
     {
-        public GeneralWindow()
+        public RepairRequestsPage()
         {
             InitializeComponent();
         }

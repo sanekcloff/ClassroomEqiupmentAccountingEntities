@@ -8,7 +8,7 @@
         xmlns:vm="clr-namespace:ClassroomEquipmentAccountingWindowsApp.ViewModels"
         xmlns:converters="clr-namespace:ClassroomEquipmentAccountingWindowsApp.Core.Converters"
         mc:Ignorable="d"
-        Title="GeneralWindow" Height="450" Width="800">
+        Title="GeneralWindow" Height="450" Width="800" Background="{StaticResource WindowPrimaryColor}" MinWidth="800" MinHeight="450">
     <Window.Resources>
         <converters:PermissionToVisibilityConverter x:Key="PermissionToVisibilityConverter" Invert="False"/>
         <converters:PermissionToVisibilityConverter x:Key="PermissionToVisibilityConverter_Inverted" Invert="True"/>
@@ -16,12 +16,67 @@
     <Window.DataContext>
         <vm:GeneralWindowViewModel/>
     </Window.DataContext>
-    
+
     <Grid>
 
-        <TextBlock Text="У вас отсутвует доступ к функциям" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Visibility="{Binding CurrentUser, Converter={StaticResource PermissionToVisibilityConverter_Inverted},ConverterParameter={x:Static models:Permission.None}}"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
+        <TextBlock Text="У вас отсутвует доступ к функциям" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="40" Visibility="{Binding CurrentUser, Converter={StaticResource PermissionToVisibilityConverter},ConverterParameter={x:Static models:Permission.None}, FallbackValue=Collapsed}" Grid.ColumnSpan="2"/>
 
+        <Border Grid.Column="0" Background="{StaticResource WindowSecondaryColor}" CornerRadius="30" Margin="12,12,6,12" Visibility="{Binding CurrentUser, Converter={StaticResource PermissionToVisibilityConverter_Inverted},ConverterParameter={x:Static models:Permission.None}}">
+
+            <Grid>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="80"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="5"/>
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+
+                <Rectangle Grid.Row="1" Fill="{StaticResource WindowTertiaryColor}"/>
+                <Rectangle Grid.Row="3" Fill="{StaticResource WindowTertiaryColor}"/>
+
+                <StackPanel Orientation="Vertical" Grid.Row="0" Margin="7" VerticalAlignment="Center" >
+
+                    <TextBlock Text="{Binding CurrentUser.ShortName, FallbackValue=Фамилия И.О.}" Margin="4,4,4,0" FontSize="20" FontWeight="Bold"/>
+                    <TextBlock Text="{Binding CurrentUser.TagAsText, FallbackValue=Должность}" Margin="4,0,4,4" FontSize="14"/>
+
+                </StackPanel>
+                
+                <StackPanel Orientation="Vertical" Grid.Row="2" Margin="7">
+
+                    <Button Content="Пользователи" Height="40" Margin="4,4,4,2" Visibility="{Binding CurrentUser, Converter={StaticResource PermissionToVisibilityConverter},ConverterParameter={x:Static models:Permission.ViewingUsers}}" Command="{Binding SwitchToUsersPageCommand}"/>
+
+                    <Button Content="Категории" Height="40" Margin="4,2,4,2" Visibility="{Binding CurrentUser, Converter={StaticResource PermissionToVisibilityConverter},ConverterParameter={x:Static models:Permission.ViewingCategories}}" Command="{Binding SwitchToCategoriesPageCommand}"/>
+
+                    <Button Content="Аудитории" Height="40" Margin="4,2,4,2" Visibility="{Binding CurrentUser, Converter={StaticResource PermissionToVisibilityConverter},ConverterParameter={x:Static models:Permission.ViewingClassrooms}}" Command="{Binding SwitchToClassroomsPageCommand}"/>
+
+                    <Button Content="Оборудование" Height="40" Margin="4,2,4,2" Visibility="{Binding CurrentUser, Converter={StaticResource PermissionToVisibilityConverter},ConverterParameter={x:Static models:Permission.ViewingEquipments}}" Command="{Binding SwitchToEquipmentsPageCommand}"/>
+
+                    <Button Content="Ремонт" Height="40" Margin="4,2,4,4" Visibility="{Binding CurrentUser, Converter={StaticResource PermissionToVisibilityConverter},ConverterParameter={x:Static models:Permission.ViewingRequests}}" Command="{Binding SwitchToRepaierRequestsPageCommand}"/>
+
+                </StackPanel>
+
+                <StackPanel Orientation="Vertical" Grid.Row="4" Margin="7" VerticalAlignment="Center" >
+
+                    <Button Content="Выход" Height="40"/>
+
+                </StackPanel>
+
+            </Grid>
+            
+        </Border>
+
+        <Border Grid.Column="1" Background="{StaticResource WindowSecondaryColor}" CornerRadius="30" Margin="6,12,12,12" Visibility="{Binding CurrentUser, Converter={StaticResource PermissionToVisibilityConverter_Inverted},ConverterParameter={x:Static models:Permission.None}}">
+
+            <Frame x:Name="GeneralWindowFrame" Margin="3" Content="{Binding CurrentPage, UpdateSourceTrigger=PropertyChanged}" NavigationUIVisibility="Hidden"/>
+
+        </Border>
 
     </Grid>
     

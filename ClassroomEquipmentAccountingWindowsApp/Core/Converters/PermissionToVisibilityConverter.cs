@@ -13,34 +13,23 @@ namespace ClassroomEquipmentAccountingWindowsApp.Core.Converters
         public bool Invert { get; set; } = false;
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (parameter == null)
+            if (value is not User user)
                 return Visibility.Collapsed;
 
-            var user = AppCore.Instance.CurrentUser;
-
-            if (user == null)
+            if (parameter is not Permission requiredPermission)
                 return Visibility.Collapsed;
 
-            Permission requiredPermission;
-            if (parameter is Permission permission)
+            bool hasPermission;
+
+            if (requiredPermission == Permission.None)
             {
-                requiredPermission = permission;
-            }
-            else if (parameter is string strPermission)
-            {
-                if (!Enum.TryParse(strPermission, out requiredPermission))
-                {
-                    return Visibility.Collapsed;
-                }
+                hasPermission = user.Permissions == Permission.None;
             }
             else
             {
-                return Visibility.Collapsed;
+                hasPermission = (user.Permissions & requiredPermission) == requiredPermission;
             }
-
-            bool hasPermission = (user.Permissions & requiredPermission) == requiredPermission;
-            var result = Invert ? !hasPermission : hasPermission;
-            return result ? Visibility.Visible : Visibility.Collapsed;
+                return (Invert ? !hasPermission : hasPermission) ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

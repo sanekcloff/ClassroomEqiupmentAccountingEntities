@@ -41,6 +41,13 @@ namespace ClassroomEquipmentAccountingEntities.Models
 
         public string FullName => $"{LastName} {FirstName} {MiddleName}";
         public string ShortName => $"{LastName} {FirstName[0]}. {MiddleName[0]}.";
+        public string TagAsText => Tag switch
+        {
+            Tag.None => "Отсутвует",
+            Tag.Manager => "Зав. Кабинетом",
+            Tag.Admin => "Администратор",
+            _ => "Неопознаный"
+        };
 
         public override int GetHashCode() => HashCode.Combine(Login);
         public override bool Equals(object? obj) => obj == null || !(obj is User) ? false : GetHashCode() == obj.GetHashCode();

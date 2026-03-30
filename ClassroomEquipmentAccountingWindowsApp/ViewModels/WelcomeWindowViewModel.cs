@@ -16,9 +16,16 @@ namespace ClassroomEquipmentAccountingWindowsApp.ViewModels
             LoginCommand = new(lc =>
             {
                 var sameLoginUser = AppCore.Instance.AppDbContext.Users.FirstOrDefault(u => u.Login == Login);
-                if (sameLoginUser != null && PasswordEncoder.Verify(sameLoginUser.PasswordHash, Password)) MessageBox.Show("Успешный вход!");
-                AppCore.Instance.CurrentUser = sameLoginUser;
-                new GeneralWindow().ShowDialog();
+                if (sameLoginUser != null && PasswordEncoder.Verify(sameLoginUser.PasswordHash, Password))
+                {
+                    MessageBox.Show("Успешный вход!");
+                    AppCore.Instance.CurrentUser = sameLoginUser;
+                    new GeneralWindow().ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show($"Пользователь с логином {Login} не найден или указан неверный пароль!");
+                }
             });
             RegistrationCommand = new(rc =>
             {
