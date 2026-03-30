@@ -64,7 +64,7 @@
 
                 <StackPanel Orientation="Vertical" Grid.Row="4" Margin="7" VerticalAlignment="Center" >
 
-                    <Button Content="Выход" Height="40"/>
+                    <Button Content="Выход" Height="40" Command="{Binding ExitCommand}"/>
 
                 </StackPanel>
 

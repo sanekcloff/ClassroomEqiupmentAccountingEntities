@@ -34,6 +34,10 @@ namespace ClassroomEquipmentAccountingWindowsApp.ViewModels
             {
                 CurrentPage = new CategoryPage();
             });
+            ExitCommand = new(action => 
+            {
+                Environment.Exit(0);
+            });
         }
         public User CurrentUser { get; init; }
 
@@ -44,6 +48,7 @@ namespace ClassroomEquipmentAccountingWindowsApp.ViewModels
         public RelayCommand SwitchToEquipmentsPageCommand { get; }
         public RelayCommand SwitchToRepaierRequestsPageCommand { get; }
         public RelayCommand SwitchToCategoriesPageCommand { get; }
+        public RelayCommand ExitCommand { get; }
 
     }
 }
