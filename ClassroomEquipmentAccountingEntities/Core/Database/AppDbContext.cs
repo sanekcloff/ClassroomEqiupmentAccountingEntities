@@ -8,6 +8,10 @@ namespace ClassroomEquipmentAccountingEntities.Core.Database
 {
     public class AppDbContext : DbContext
     {
+        public AppDbContext()
+        {
+            Database.EnsureCreated();
+        }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<Equipment> Equipments { get; set; }
