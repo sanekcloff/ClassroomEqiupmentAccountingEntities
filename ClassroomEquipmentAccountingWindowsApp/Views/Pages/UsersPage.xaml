@@ -13,7 +13,6 @@
     </Page.DataContext>
 
     <Grid>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
@@ -21,28 +20,33 @@
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
-
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="60"/>
-                <ColumnDefinition Width="1.8*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="1.2*"/>
+                <ColumnDefinition Width="1.2*"/>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="+" Margin="10" Command="{Binding ManageUserCommand}"/>
-
-            <TextBox Grid.Column="1" Margin=" 10"/>
-
-            <ComboBox Grid.Column="2" Margin="10"/>
-            
-            <ComboBox Grid.Column="3" Margin="10"/>
-
+            <Button Grid.Column="0" Content="+" Margin="10" Command="{Binding AddUserCommand}"/>
+            <TextBox Grid.Column="1" Margin="10" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+            <ComboBox Grid.Column="2" Margin="10" ItemsSource="{Binding SortOptions}" SelectedItem="{Binding SelectedSort}"/>
+            <ComboBox Grid.Column="3" Margin="10" ItemsSource="{Binding TagFilterOptions}" SelectedItem="{Binding SelectedTagFilter}"/>
         </Grid>
 
-        <ListView Grid.Row="1" Margin="10" SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged}" ItemsSource="{Binding Users, UpdateSourceTrigger=PropertyChanged}"/>
+        <ListView Grid.Row="1"
+                  Margin="10"
+                  SelectedItem="{Binding SelectedUser, UpdateSourceTrigger=PropertyChanged}"
+                  ItemsSource="{Binding UsersView}">
+            <ListView.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding DeleteUserCommand}" />
+            </ListView.InputBindings>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <EventSetter Event="MouseDoubleClick" Handler="ListViewItem_MouseDoubleClick"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+        </ListView>
 
-        <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="3/3" FontSize="20"/>
-
+        <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Users.Count, StringFormat='Всего: {0}'}" FontSize="20"/>
     </Grid>
-    
 </Page>

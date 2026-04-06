@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ClassroomEquipmentAccountingWindowsApp.Views"
         xmlns:vm="clr-namespace:ClassroomEquipmentAccountingWindowsApp.ViewModels"
         mc:Ignorable="d"
-        Title="Окно управления пользователем" Height="450" Width="800" ResizeMode="NoResize" Background="{StaticResource WindowPrimaryColor}">
+        Title="Окно управления пользователем" Height="400" Width="800" ResizeMode="NoResize" Background="{StaticResource WindowPrimaryColor}">
     <Window.DataContext>
         <vm:UserManagerWindowViewModel/>
     </Window.DataContext>
@@ -17,6 +17,7 @@
             <RowDefinition Height="90"/>
             <RowDefinition Height="90"/>
             <RowDefinition/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
 
         <Grid Grid.Row="0">
@@ -46,7 +47,7 @@
             <StackPanel Grid.Column="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center" Width="230">
 
                 <TextBlock Text="Тэг" FontSize="16" Margin="4,4,4,2"/>
-                <ComboBox ItemsSource="{Binding Tags}" SelectedItem="{Binding SelectedTag,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0" Height="30" FontSize="16" Margin="4,2,4,4"/>
+                <ComboBox ItemsSource="{Binding PermissionTags,UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedTag,UpdateSourceTrigger=PropertyChanged}" SelectedIndex="0" Height="30" FontSize="16" Margin="4,2,4,4"/>
 
             </StackPanel>
 
@@ -85,7 +86,7 @@
 
         </Grid>
 
-        <Border Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="750" Height="210" CornerRadius="20" Background="{StaticResource WindowSecondaryColor}">
+        <Border Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="750" Height="auto" CornerRadius="20" Background="{StaticResource WindowSecondaryColor}">
 
             <ScrollViewer Margin="10">
 
@@ -188,6 +189,8 @@
             </ScrollViewer>
             
         </Border>
+
+        <Button Grid.Row="3" Height="35" Width="150" Content="Сохранить" Command="{Binding UserSaveCommand}"/>
 
     </Grid>
     

@@ -20,6 +20,7 @@ namespace ClassroomEquipmentAccountingWindowsApp.Views
         public WelcomeWindow()
         {
             InitializeComponent();
+
         }
     }
 }

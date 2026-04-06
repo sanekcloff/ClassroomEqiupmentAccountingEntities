@@ -31,6 +31,11 @@ namespace ClassroomEquipmentAccountingWindowsApp.ViewModels
             {
                 new RegistrationWindow().ShowDialog();
             });
+
+#if DEBUG
+            Login = "login";
+            Password = "password";
+#endif
         }
 
         public string Login { get; set => Set(ref field, in value, nameof(Login)); }
