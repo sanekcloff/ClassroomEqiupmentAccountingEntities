@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ClassroomEquipmentAccountingWindowsApp.ViewModels;
 
 namespace ClassroomEquipmentAccountingWindowsApp.Views.Pages
 {
@@ -21,6 +22,12 @@ namespace ClassroomEquipmentAccountingWindowsApp.Views.Pages
         public EquipmentPage()
         {
             InitializeComponent();
+        }
+
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is EquipmentPageViewModel vm && vm.DoubleClickCommand.CanExecute(null))
+                vm.DoubleClickCommand.Execute(null);
         }
     }
 }

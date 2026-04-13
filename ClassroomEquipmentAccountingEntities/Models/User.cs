@@ -31,9 +31,9 @@ namespace ClassroomEquipmentAccountingEntities.Models
         }
         public string Login { get; set; }
         public string PasswordHash { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string MiddleName { get; set; }
+        public string FirstName { get => string.IsNullOrWhiteSpace(field) ? "Имя" : field; set; }
+        public string LastName { get => string.IsNullOrWhiteSpace(field) ? "Фамилия" : field; set; }
+        public string MiddleName { get => string.IsNullOrWhiteSpace(field) ? "Отчество" : field; set; }
         public Permission Permissions { get; set; }
         public Tag Tag { get; set; }
 

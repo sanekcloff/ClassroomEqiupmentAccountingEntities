@@ -1,0 +1,65 @@
+﻿<Window x:Class="ClassroomEquipmentAccountingWindowsApp.Views.RepairRequestCreationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:ClassroomEquipmentAccountingWindowsApp.ViewModels"
+        Title="Создание заявки" SizeToContent="WidthAndHeight" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner" Background="White" Padding="12">
+    <Window.DataContext>
+        <vm:RepairRequestCreationWindowViewModel />
+    </Window.DataContext>
+
+    <Grid Width="720" Height="360">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="80" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="48" />
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Оборудование в кабинете" Margin="6" Grid.Column="0">
+            <ListBox ItemsSource="{Binding AvailableEquipments}" SelectedItem="{Binding SelectedAvailable}" Margin="6">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#FFF0F0F0" CornerRadius="6" Padding="8" Margin="0,6">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Category.Title}" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding SerialNumber, StringFormat=Сер. номер: {0}}" Margin="0,4,0,0"/>
+                                <TextBlock Text="{Binding InventoryNumber, StringFormat=Инв. номер: {0}}" Margin="0,2,0,0"/>
+                                <TextBlock Text="{Binding Status, StringFormat=Статус: {0}}" Margin="0,2,0,0"/>
+                                <TextBlock Text="{Binding CommissioningDate, StringFormat=Эксплуатация: {0:dd.MM.yyyy}}" Margin="0,2,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <Button Content="Add" Command="{Binding AddToRequestCommand}" Width="48" Margin="0,8" IsEnabled="{Binding CanAdd}"/>
+            <Button Content="Del" Command="{Binding RemoveFromRequestCommand}" Width="48" Margin="0,8" IsEnabled="{Binding CanAdd}"/>
+        </StackPanel>
+
+        <GroupBox Header="Оборудование на ремонт" Margin="6" Grid.Column="2">
+            <ListBox ItemsSource="{Binding InRequestEquipments}" SelectedItem="{Binding SelectedInRequest}" Margin="6">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border Background="#FFF0F0F0" CornerRadius="6" Padding="8" Margin="0,6">
+                            <StackPanel>
+                                <TextBlock Text="{Binding Category.Title}" FontWeight="SemiBold"/>
+                                <TextBlock Text="{Binding SerialNumber, StringFormat=Сер. номер: {0}}" Margin="0,4,0,0"/>
+                                <TextBlock Text="{Binding InventoryNumber, StringFormat=Инв. номер: {0}}" Margin="0,2,0,0"/>
+                                <TextBlock Text="{Binding Status, StringFormat=Статус: {0}}" Margin="0,2,0,0"/>
+                                <TextBlock Text="{Binding CommissioningDate, StringFormat=Эксплуатация: {0:dd.MM.yyyy}}" Margin="0,2,0,0"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </GroupBox>
+
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3" Content="Отправить" Command="{Binding SubmitCommand}" Width="180" Height="36" HorizontalAlignment="Left" Background="#222" Foreground="White" Margin="6"/>
+    </Grid>
+</Window>

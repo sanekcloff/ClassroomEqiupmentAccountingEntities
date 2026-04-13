@@ -3,6 +3,7 @@ using ClassroomEquipmentAccountingEntities.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Windows.Input;
 
 namespace ClassroomEquipmentAccountingWindowsApp.Core
 {
@@ -11,7 +12,21 @@ namespace ClassroomEquipmentAccountingWindowsApp.Core
         private static readonly AppCore _instance = new AppCore();
         public static AppCore Instance => _instance;
         public readonly AppDbContext AppDbContext = new AppDbContext();
-        public User? CurrentUser { get => field ?? throw new Exception("Пользователь не проинициализирован!"); set; }
+
+        private User? _currentUser;
+        public event EventHandler? CurrentUserChanged;
+
+        public User? CurrentUser
+        {
+            get => _currentUser ?? throw new Exception("Пользователь не проинициализирован!");
+            set
+            {
+                _currentUser = value;
+                // Обновляем состояние команд в UI и оповещаем подписчиков
+                CommandManager.InvalidateRequerySuggested();
+                CurrentUserChanged?.Invoke(this, EventArgs.Empty);
+            }
+        }
 
         private AppCore() { }
     }

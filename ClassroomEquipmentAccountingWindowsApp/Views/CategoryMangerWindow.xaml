@@ -1,0 +1,24 @@
+﻿<Window x:Class="ClassroomEquipmentAccountingWindowsApp.Views.CategoryMangerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Категория" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
+        Background="White" Padding="14">
+    <Grid Width="320">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        
+        <TextBlock Text="Название" FontWeight="SemiBold"/>
+        <TextBox Grid.Row="1" Margin="4" Height="36" Padding="8" Text="{Binding Title, UpdateSourceTrigger=PropertyChanged}" />
+
+        <TextBlock Grid.Row="2" Text="Описание" FontWeight="SemiBold"/>
+        <TextBox Grid.Row="3" Margin="4" Height="100" Padding="8" Text="{Binding Description, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="True" VerticalScrollBarVisibility="Auto"/>
+
+        <Button Grid.Row="4" Content="Сохранить" Command="{Binding SaveCommand}" Width="160" Height="36" HorizontalAlignment="Center" Background="#222" Foreground="White" Margin="6"/>
+    </Grid>
+</Window>

@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using ClassroomEquipmentAccountingWindowsApp.ViewModels;
+using ClassroomEquipmentAccountingEntities.Models;
 
 namespace ClassroomEquipmentAccountingWindowsApp.Views.Pages
 {
@@ -21,6 +15,24 @@ namespace ClassroomEquipmentAccountingWindowsApp.Views.Pages
         public RepairRequestsPage()
         {
             InitializeComponent();
+        }
+
+        private void ListViewItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (DataContext is not RepairRequestsPageViewModel vm) return;
+
+            // Получаем объект напрямую из DataContext элемента, чтобы не зависеть от SelectedItem
+            if (sender is FrameworkElement fe && fe.DataContext is RepairRequest item)
+            {
+                if (vm.DoubleClickCommand.CanExecute(item))
+                    vm.DoubleClickCommand.Execute(item);
+            }
+            else
+            {
+                // fallback
+                if (vm.DoubleClickCommand.CanExecute(null))
+                    vm.DoubleClickCommand.Execute(null);
+            }
         }
     }
 }

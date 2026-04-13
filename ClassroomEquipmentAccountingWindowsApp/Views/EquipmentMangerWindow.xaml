@@ -1,0 +1,55 @@
+﻿<Window x:Class="ClassroomEquipmentAccountingWindowsApp.Views.EquipmentMangerWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Оборудование" SizeToContent="WidthAndHeight" ResizeMode="NoResize" WindowStartupLocation="CenterOwner"
+        Background="White" Padding="14">
+    <Grid Width="760" Height="260">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="48"/>
+        </Grid.RowDefinitions>
+
+        <!-- Row 0 -->
+        <StackPanel Grid.Column="0" Margin="8">
+            <TextBlock Text="Название" FontWeight="SemiBold"/>
+            <TextBox Margin="0,6,0,8" Height="34" Padding="8" Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="Модель" FontWeight="SemiBold"/>
+            <TextBox Margin="0,6,0,8" Height="34" Padding="8" Text="{Binding Model, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="Аудитория" FontWeight="SemiBold"/>
+            <ComboBox Margin="0,6,0,0" Height="34" ItemsSource="{Binding Classrooms}" SelectedItem="{Binding SelectedClassroom}" DisplayMemberPath="Number"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="8">
+            <TextBlock Text="Серийный номер" FontWeight="SemiBold"/>
+            <TextBox Margin="0,6,0,8" Height="34" Padding="8" Text="{Binding SerialNumber, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="Дата ввода в эксплуатацию" FontWeight="SemiBold"/>
+            <DatePicker Margin="0,6,0,8" SelectedDate="{Binding CommissioningDate}"/>
+
+            <TextBlock Text="Категория" FontWeight="SemiBold"/>
+            <ComboBox Margin="0,6,0,0" Height="34" ItemsSource="{Binding Categories}" SelectedItem="{Binding SelectedCategory}" DisplayMemberPath="Title"/>
+        </StackPanel>
+
+        <StackPanel Grid.Column="2" Margin="8">
+            <TextBlock Text="Инвентарный номер" FontWeight="SemiBold"/>
+            <TextBox Margin="0,6,0,8" Height="34" Padding="8" Text="{Binding InventoryNumber, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBlock Text="Дата вывода из эксплуатации" FontWeight="SemiBold"/>
+            <DatePicker Margin="0,6,0,8" SelectedDate="{Binding WaranityEndDate}"/>
+
+            <TextBlock Text="Статус" FontWeight="SemiBold"/>
+            <ComboBox Margin="0,6,0,0" Height="34" ItemsSource="{Binding StatusValues}" SelectedItem="{Binding SelectedStatus}"/>
+        </StackPanel>
+
+        <Button Grid.Row="2" Grid.ColumnSpan="3" Content="Сохранить" Command="{Binding SaveCommand}" Width="220" Height="36"
+                HorizontalAlignment="Center" Background="#222" Foreground="White" Margin="0,6,0,0"/>
+    </Grid>
+</Window>
