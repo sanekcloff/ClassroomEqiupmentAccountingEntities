@@ -13,9 +13,9 @@
     
     <StackPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
 
-        <TextBox Width="250" Height="40" Margin="0,0,0,5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Login}"/>
-        
-        <TextBox Width="250" Height="40" Margin="0,5,0,5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Text="{Binding Password}"/>
+        <TextBox Width="250" Height="40" Margin="0,0,0,5" VerticalContentAlignment="Center" Text="{Binding Login}" Tag="Введите логин"/>
+
+        <TextBox Width="250" Height="40" Margin="0,5,0,5"  VerticalContentAlignment="Center" Text="{Binding Password}" Tag="Введите пароль"/>
 
         <Button Width="150" Height="30" Margin="0,5,0,0" Content="Вход" Command="{Binding LoginCommand}"/>
 

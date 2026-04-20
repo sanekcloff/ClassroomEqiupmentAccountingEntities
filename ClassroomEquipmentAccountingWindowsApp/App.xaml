@@ -8,6 +8,7 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Assets/ResourceDictionaries/AppColors.xaml"/>
+                <ResourceDictionary Source="/Assets/ResourceDictionaries/ControlStyles.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
          

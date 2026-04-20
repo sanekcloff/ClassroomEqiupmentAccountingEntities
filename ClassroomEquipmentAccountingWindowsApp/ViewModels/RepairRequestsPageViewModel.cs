@@ -8,6 +8,8 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Collections.Generic;
+using FormatConverterLib.Formats;
+using Microsoft.Win32;
 
 namespace ClassroomEquipmentAccountingWindowsApp.ViewModels
 {
@@ -36,6 +38,10 @@ namespace ClassroomEquipmentAccountingWindowsApp.ViewModels
 
             CreateInventoryCommand = new RelayCommand(_ => CreateInventory(), _ => CanCreateInventory);
 
+            ExportToPdfCommand = new RelayCommand(param => ExportToPdf(param as RepairRequest), param => param is RepairRequest);
+
+            SaveToPdfCommand = new RelayCommand(_ => SaveSelectedRequestToPdf(), _ => SelectedItem != null);
+
             SelectedSort = "По умолчанию";
             SelectedFilter = FilterOptions[0];
         }
@@ -50,6 +56,8 @@ namespace ClassroomEquipmentAccountingWindowsApp.ViewModels
         public RelayCommand DeleteCommand { get; }
         public RelayCommand RefreshCommand { get; }
         public RelayCommand CreateInventoryCommand { get; }
+        public RelayCommand ExportToPdfCommand { get; }
+        public RelayCommand SaveToPdfCommand { get; }
 
         public List<string> SortOptions { get; }
         public List<string> FilterOptions { get; }
@@ -186,6 +194,57 @@ namespace ClassroomEquipmentAccountingWindowsApp.ViewModels
             }
 
             MessageBox.Show($"Создание инвентаря для заявки {SelectedItem.Id}", "Инвентарь", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+        private void ExportToPdf(RepairRequest? request)
+        {
+            if (request == null) return;
+
+            try
+            {
+                var pdfDoc = new PDFDoc<RepairRequest>("Заявка");
+                pdfDoc.SetData(new List<string> { "ID", "Описание", "Дата начала", "Дата окончания" },
+                               new List<RepairRequest> { request });
+                pdfDoc.Generate($"Заявка_{request.Id}.pdf");
+                pdfDoc.Save();
+
+                MessageBox.Show($"Заявка {request.Id} успешно экспортирована в PDF.", "Экспорт завершён", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при экспорте в PDF: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void SaveSelectedRequestToPdf()
+        {
+            if (SelectedItem == null) return;
+
+            try
+            {
+                // Открытие диалога сохранения файла
+                var saveFileDialog = new SaveFileDialog
+                {
+                    Filter = "PDF Files (*.pdf)|*.pdf",
+                    FileName = $"Заявка_{SelectedItem.Id}.pdf"
+                };
+
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    // Генерация и сохранение PDF
+                    var pdfDoc = new PDFDoc<RepairRequest>("Заявка");
+                    pdfDoc.SetData(new List<string> { "ID", "Описание", "Дата начала", "Дата окончания" },
+                                   new List<RepairRequest> { SelectedItem });
+                    pdfDoc.Generate(saveFileDialog.FileName);
+                    pdfDoc.Save();
+
+                    MessageBox.Show($"Заявка {SelectedItem.Id} успешно сохранена в PDF.", "Сохранение завершено", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка при сохранении в PDF: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
     }
 }

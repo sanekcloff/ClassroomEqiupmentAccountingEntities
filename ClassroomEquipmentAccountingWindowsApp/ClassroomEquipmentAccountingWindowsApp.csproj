@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClassroomEquipmentAccountingEntities\ClassroomEquipmentAccountingEntities.csproj" />
+    <ProjectReference Include="..\FormatConverterLib\FormatConverterLib.csproj" />
   </ItemGroup>
 
   <ItemGroup>
