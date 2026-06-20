@@ -10,6 +10,7 @@ using System.Windows.Data;
 using System.Collections.Generic;
 using FormatConverterLib.Formats;
 using Microsoft.Win32;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClassroomEquipmentAccountingWindowsApp.ViewModels
 {
@@ -17,7 +18,7 @@ namespace ClassroomEquipmentAccountingWindowsApp.ViewModels
     {
         public RepairRequestsPageViewModel()
         {
-            Items = new ObservableCollection<RepairRequest>(AppCore.Instance.AppDbContext.RepairRequests);
+            Items = new ObservableCollection<RepairRequest>(AppCore.Instance.AppDbContext.RepairRequests.Include(rp=>rp.RepairRequestEquipments).ThenInclude(rrre=>rrre.Equipment).ThenInclude(e=>e.Category));
             ItemsView = CollectionViewSource.GetDefaultView(Items);
 
             // команды: добавление открывает окно создания
@@ -238,7 +239,10 @@ namespace ClassroomEquipmentAccountingWindowsApp.ViewModels
                     pdfDoc.Generate(saveFileDialog.FileName);
                     pdfDoc.Save();
 
-                    MessageBox.Show($"Заявка {SelectedItem.Id} успешно сохранена в PDF.", "Сохранение завершено", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show($"Заявка {SelectedItem.Id} успешно сохранена в PDF по пути: {saveFileDialog.FileName}.", 
+                                    "Сохранение завершено", 
+                                    MessageBoxButton.OK, 
+                                    MessageBoxImage.Information);
                 }
             }
             catch (Exception ex)

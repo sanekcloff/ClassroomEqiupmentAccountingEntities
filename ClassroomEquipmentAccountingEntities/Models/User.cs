@@ -51,6 +51,6 @@ namespace ClassroomEquipmentAccountingEntities.Models
 
         public override int GetHashCode() => HashCode.Combine(Login);
         public override bool Equals(object? obj) => obj == null || !(obj is User) ? false : GetHashCode() == obj.GetHashCode();
-        public override string ToString() => $"[{Id}][{FullName}] - {Login}:{Permissions} (IsHidden = {IsHidden})";
+        public override string ToString() => $"[{Id}][{FullName}] - Login ({Login}):Permissions - {Permissions} (IsHidden = {IsHidden})";
     }
 }

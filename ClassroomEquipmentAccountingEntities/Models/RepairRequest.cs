@@ -41,7 +41,7 @@ namespace ClassroomEquipmentAccountingEntities.Models
                 return (ushort)Math.Clamp((EndDate - StartDate).Value.Days, ushort.MinValue, ushort.MaxValue);
             }
         }
-        public override string ToString() => $"[{Id}] {StartDate} - {EndDate} / Описание: {_description}";
+        public override string ToString() => $"[{Id}] {StartDate.ToString("d")} {(EndDate == null ? "" : $"- {EndDate.Value.ToString("d")}")} / Описание: {(string.IsNullOrWhiteSpace(_description) ? "Без описания" : _description)}";
         public override bool Equals(object? obj) => obj == null || !(obj is RepairRequest) ? false : GetHashCode() == obj.GetHashCode();
         public override int GetHashCode() => HashCode.Combine(StartDate,EndDate,Description);
         public RepairRequest AddEquipment(Equipment equipment)

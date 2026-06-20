@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="ClassroomEquipmentAccountingEntities/ClassroomEquipmentAccountingEntities.csproj" />
+  <Project Path="ClassroomEquipmentAccountingUnitTests/ClassroomEquipmentAccountingUnitTests.csproj" Id="058380f1-ecf2-46eb-b891-5c5235430bcf" />
   <Project Path="ClassroomEquipmentAccountingWindowsApp/ClassroomEquipmentAccountingWindowsApp.csproj" Id="f39a904e-d65b-4f41-8cc8-2b6ebcecbd79" />
   <Project Path="FormatConverterLib/FormatConverterLib.csproj" Id="4ca111cf-5664-48fc-96da-cd9e84b64d14" />
   <Project Path="TestConsoleApp/TestConsoleApp.csproj" Id="f1464805-f840-4d8b-adfe-27117f816d72" />
